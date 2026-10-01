@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'" />
+    <title>Stretch Timer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main id="app">
+      <header>
+        <h1>Stretch Timer</h1>
+        <span id="count" class="badge" title="Stretches confirmed today">0 today</span>
+      </header>
+
+      <section class="dial">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
+          <circle class="track" cx="100" cy="100" r="88" />
+          <circle id="progress" class="progress" cx="100" cy="100" r="88" />
+        </svg>
+        <div class="readout">
+          <div id="remaining" class="remaining">--:--</div>
+          <div id="caption" class="caption">until stretch</div>
+        </div>
+      </section>
+
+      <p id="since" class="since"></p>
+
+      <form id="settings" class="settings" novalidate>
+        <label for="minutes">Remind me every</label>
+        <div class="row">
+          <input id="minutes" type="number" inputmode="numeric" step="1" required />
+          <span>min</span>
+          <button id="save" type="submit" disabled>Set</button>
+        </div>
+        <p id="error" class="error" hidden></p>
+      </form>
+
+      <footer>
+        <label class="check">
+          <input id="login" type="checkbox" />
+          Start with Windows
+        </label>
+        <button id="pause" class="link" type="button">Pause</button>
+        <button id="restart" class="link" type="button">Restart timer</button>
+      </footer>
+    </main>
+
+    <div id="alert" class="alert" hidden>
+      <div class="alert-body">
+        <div class="alert-title">Time to stretch!</div>
+        <div id="overdue" class="alert-sub"></div>
+        <button id="confirm" type="button">I stood up and stretched</button>
+      </div>
+    </div>
+
+    <script src="renderer.js"></script>
+  </body>
+</html>

@@ -14,6 +14,7 @@ when the time is up, flashes until you confirm **"I stood up and stretched"**.
 - The alert does **not** take keyboard focus, so a keypress while typing can't confirm it.
   You have to click the button.
 - Confirming starts a new countdown. Locking the screen also clears the alert (you walked away).
+- **Pause** (button or tray menu) stops the timer until you click **Resume**, which starts a fresh countdown. Locking and unlocking don't change a manual pause.
 - Closing the window hides it to the system tray; the timer keeps running. Quit from the tray menu.
   The tray icon is green while counting, grey while locked and orange when it's time to stretch.
 - The interval (1–600 minutes) is saved in `%APPDATA%\Stretch Timer\settings.json`.
@@ -40,3 +41,22 @@ npm run icon         # regenerate build/icon.png
 
 Enable "Start with Windows" from the installed app rather than from `npm start`.
 Otherwise the login entry points at the dev copy.
+
+## Python edition (no EXE)
+
+`python/stretch_timer.pyw` is a standard-library-only port (tkinter) for machines that
+block unsigned EXEs. It has the same behaviour and reads the same `settings.json`.
+
+```sh
+pythonw python/stretch_timer.pyw          # or double-click the file
+python python/stretch_timer.pyw --fast    # test mode
+```
+
+Differences from the Electron version: no tray icon (closing the window minimises it to the
+taskbar; use **Quit** to exit), and the alert is the on-top flashing window, taskbar flash and a
+beep rather than a Windows toast.
+
+The Python edition also serves a read-only status page on `127.0.0.1:3330` (`/health`, JSON; override
+with `STRETCH_PORT`) so Server Viewer can show it and start/stop it. Server Viewer entry:
+port `3330`, health path `/health`, command `C:\Python312\pythonw.exe stretch_timer.pyw`, working
+directory the `python` folder.

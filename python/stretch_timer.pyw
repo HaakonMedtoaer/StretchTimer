@@ -1,8 +1,8 @@
-"""Stretch Timer (Python edition).
+"""Stretch Timer.
 
 Counts down from when you unlock your computer and flashes until you confirm
-that you stood up and stretched. Behaves like the Electron version, but needs
-nothing beyond the standard library (Python 3.8+ on Windows, with tkinter).
+that you stood up and stretched. Needs nothing beyond the standard library
+(Python 3.8+ on Windows, with tkinter).
 
 Run:   pythonw stretch_timer.pyw          (no console window)
 Test:  python stretch_timer.pyw --fast    (1 "minute" = 1 second)
@@ -52,7 +52,7 @@ user32 = ctypes.windll.user32
 kernel32 = ctypes.windll.kernel32
 
 
-# ---------- settings (same file and keys as the Electron version) ----------
+# ---------- settings ----------
 
 SETTINGS_DIR = os.path.join(os.environ.get('APPDATA', os.path.expanduser('~')),
                             APP_NAME + (' (fast)' if FAST else ''))
@@ -357,7 +357,7 @@ class StretchTimer:
         root.configure(bg=BG)
         root.geometry('360x500')
         root.minsize(320, 480)
-        icon = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'build', 'icon.png')
+        icon = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'icon.png')
         try:
             self.icon = tk.PhotoImage(file=icon)
             root.iconphoto(True, self.icon)
